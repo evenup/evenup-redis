@@ -23,8 +23,8 @@ class redis::service {
 
   $monitoring = hiera('monitoring', '')
 
-  if $monitoring == 'sensu' {
-    sensu::client_subscription { 'redis': }
+  case $monitoring {
+    'sensu':  { sensu::client_subscription { 'redis': } }
   }
 
 }
