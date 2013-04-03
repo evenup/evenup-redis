@@ -1,5 +1,5 @@
 name 'evenup-redis'
-version '1.1.3'
+version '1.1.4'
 author 'Justin Lambert <jlambert@letsevenup.com>'
 license 'Apache'
 summary 'Manages redis.'
