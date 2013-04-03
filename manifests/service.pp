@@ -24,7 +24,7 @@ class redis::service {
   $monitoring = hiera('monitoring', '')
 
   case $monitoring {
-    'sensu':  { sensu::client_subscription { 'redis': } }
+    'sensu':  { include redis::monitoring::sensu }
   }
 
 }
