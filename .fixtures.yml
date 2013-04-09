@@ -1,6 +1,6 @@
 fixtures:
   repositories:
-    ruby: git@github.com:evenup/evenup-ruby.git
+    ruby: https://github.com/evenup/evenup-ruby.git
   symlinks:
     redis: "#{source_dir}"
 
