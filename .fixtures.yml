@@ -1,6 +1,7 @@
 fixtures:
   repositories:
     ruby: https://github.com/evenup/evenup-ruby.git
+    sensu: https://github.com/sensu/sensu-puppet.git
   symlinks:
     redis: "#{source_dir}"
 

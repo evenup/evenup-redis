@@ -12,7 +12,9 @@
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
-class redis::service {
+class redis::service (
+  $monitoring,
+) {
 
   service {
     'redis':
@@ -20,8 +22,6 @@ class redis::service {
       enable  => true,
       require => Package['redis'],
   }
-
-  $monitoring = hiera('monitoring', '')
 
   case $monitoring {
     'sensu':  { include redis::monitoring::sensu }
