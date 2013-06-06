@@ -86,7 +86,7 @@
 # [*auto_aof_rewrite_min_size*]
 #   Ignore append files less than this size
 #   Default: 64mb
-# 
+#
 # [*slowlog_log_slower_than*]
 #   Log queries slower than this (ms)
 #   Default: 10000
