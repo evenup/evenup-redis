@@ -9,11 +9,16 @@ script:
   - "rake lint"
   - "rake spec SPEC_OPTS='--format documentation'"
 env:
+  - PUPPET_VERSION="~> 2.7.0"
   - PUPPET_VERSION="~> 3.0.0"
   - PUPPET_VERSION="~> 3.1.0"
   - PUPPET_VERSION="~> 3.2.0"
 matrix:
   exclude:
+    - rvm: 1.9.3
+      env: PUPPET_VERSION="~> 2.7.0"
+    - rvm: 2.0.0
+      env: PUPPET_VERSION="~> 2.7.0"
     - rvm: 2.0.0
       env: PUPPET_VERSION="~> 3.0.0"
     - rvm: 2.0.0
@@ -22,7 +27,6 @@ notifications:
   email: false
   hipchat:
     rooms:
-      - secure: "PTLMgcN2s0N1A4B5vpL5QyHI0YiJJBYHOFCc2DCTlGy+X27I4PhM5aCG7OOJ\nYefb63FmtQA+N3i6R/7G0tqJx3RemS4H5g9yauPsc6iI7zzxZa0azAtQecH+\n5nPTAKECRvof0dxltbde7AAAIlVdL3S/uXdAiItmPGaWGqxXrxk="
+      - secure: "PTLMgcN2s0N1A4B5vpL5QyHI0YiJJBYHOFCc2DCTlGy+X27I4PhM5aCG7OOJ\nYefb63FmtQA+N3i6R/7G0tqJx3RemS4H5g9yauPsc6iI7zzxZa0azAtQecH+\n5nPTAKECRvof0dxltbde7AAAIlVdL3S/uXdAiItm    PGaWGqxXrxk="
   on_success: always
   on_failure: always
-

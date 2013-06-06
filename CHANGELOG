@@ -1,4 +1,5 @@
-v1.1.5:
+v1.2.0:
+  Remove hiera dependency
   Update sensu dependency
 v1.1.4:
   Add sensu monitoring
