@@ -23,7 +23,8 @@ describe 'redis::config', :type => :class do
       :auto_aof_rewrite_percentage => '100',
       :auto_aof_rewrite_min_size => '64mb',
       :slowlog_log_slower_than => 10000,
-      :slowlog_max_len => 1024
+      :slowlog_max_len => 1024,
+      :version => 'latest'
     } }
 
     it { should contain_file('/etc/redis.conf') }
@@ -47,6 +48,7 @@ describe 'redis::config', :type => :class do
     it { should contain_file('/etc/redis.conf').with_content(/^auto\-aof\-rewrite\-min\-size\s64mb$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-log\-slower\-than\s10000$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-max\-len\s1024$/) }
+    it { should_not contain_file('/etc/redis.conf').with_content(/^vm-enabled/) }
 
     context 'with Debian' do
       let(:facts) { { :osfamily => 'Debian' } }
@@ -75,7 +77,8 @@ describe 'redis::config', :type => :class do
       :auto_aof_rewrite_percentage => '10',
       :auto_aof_rewrite_min_size => '16mb',
       :slowlog_log_slower_than => 5000,
-      :slowlog_max_len => 2048
+      :slowlog_max_len => 2048,
+      :version => '2.0'
     } }
 
     it { should contain_file('/etc/redis.conf') }
@@ -98,8 +101,7 @@ describe 'redis::config', :type => :class do
     it { should contain_file('/etc/redis.conf').with_content(/^auto\-aof\-rewrite\-min\-size\s16mb$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-log\-slower\-than\s5000$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-max\-len\s2048$/) }
-
-
+    it { should contain_file('/etc/redis.conf').with_content(/^vm-enabled/) } 
   end
 
 end

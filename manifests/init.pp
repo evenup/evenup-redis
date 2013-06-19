@@ -154,6 +154,7 @@ class redis (
     auto_aof_rewrite_min_size   => $auto_aof_rewrite_min_size,
     slowlog_log_slower_than     => $slowlog_log_slower_than,
     slowlog_max_len             => $slowlog_max_len,
+    version                     => $version,
   } ~>
   class { 'redis::service':
     monitoring  => $monitoring,
