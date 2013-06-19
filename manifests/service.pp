@@ -16,8 +16,13 @@ class redis::service (
   $monitoring,
 ) {
 
+  $redis_service = $osfamily? {
+    'Debian'  => 'redis-server',
+    default   => 'redis'
+  }
+
   service {
-    'redis':
+    $redis_service: 
       ensure  => running,
       enable  => true,
       require => Package['redis'],

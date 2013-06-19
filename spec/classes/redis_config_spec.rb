@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'redis::config', :type => :class do
 
-  context 'default' do
 
+  context 'default' do
     let(:params) { {
       :port => '6379',
       :listen => '127.0.0.1',
@@ -47,6 +47,12 @@ describe 'redis::config', :type => :class do
     it { should contain_file('/etc/redis.conf').with_content(/^auto\-aof\-rewrite\-min\-size\s64mb$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-log\-slower\-than\s10000$/) }
     it { should contain_file('/etc/redis.conf').with_content(/^slowlog\-max\-len\s1024$/) }
+
+    context 'with Debian' do
+      let(:facts) { { :osfamily => 'Debian' } }
+      it { should_not contain_file('/etc/redis.conf') }
+      it { should contain_file('/etc/redis/redis.conf') }
+    end
   end
 
   context 'setting params' do

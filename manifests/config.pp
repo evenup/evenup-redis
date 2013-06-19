@@ -34,7 +34,12 @@ class redis::config (
   $slowlog_max_len
 ) {
 
-  file { '/etc/redis.conf':
+  $redis_file = $::osfamily? {
+    'Debian'  => '/etc/redis/redis.conf',
+    default   => '/etc/redis.conf'
+  }
+
+  file { $redis_file: 
     ensure  => file,
     owner   => 'redis',
     group   => 'redis',

@@ -14,8 +14,13 @@
 #
 class redis::install ( $version = 'latest' ) {
 
+  $redis_package = $::osfamily? {
+    'Debian'  => 'redis-server',
+    default   => 'redis'
+  }
+
   package {
-    'redis':
+    $redis_package:
       ensure => $version,
   }
 }

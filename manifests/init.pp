@@ -128,9 +128,10 @@ class redis (
   $monitoring                   = '',
 ) {
 
-  # Needed for sensu monitoring.
-  # TODO - move to conditional block for monitoring to be enabled?
-  include ruby::redis
+
+  if  $monitoring == 'sensu' {
+    include ruby::redis 
+  }
 
   class { 'redis::install': version => $version } ->
   class { 'redis::config':
