@@ -25,7 +25,7 @@ class redis::service (
     $redis_service: 
       ensure  => running,
       enable  => true,
-      require => Package['redis'],
+      require => Package[$redis_service],
   }
 
   case $monitoring {
