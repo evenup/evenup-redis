@@ -4,6 +4,16 @@ describe 'redis::service', :type => :class do
 
   let(:params) { { :monitoring => '' } }
   it { should create_class('redis::service') }
+
+  context 'on Debian' do
+    let(:facts) { { :osfamily => 'Debian'} }
+
+    it { should contain_service('redis-server').with(
+      'ensure'  => 'running',
+      'enable'  => 'true'
+    ) }
+  end
+  
   it { should contain_service('redis').with(
     'ensure'  => 'running',
     'enable'  => 'true'

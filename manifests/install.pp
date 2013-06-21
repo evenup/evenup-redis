@@ -5,7 +5,7 @@
 #
 # === Parameters
 #
-# See the init.pp for parameter information.  This class should not be direclty called.
+# See the init.pp for parameter information.  Don't call this class directly.
 #
 #
 # === Authors
@@ -14,8 +14,13 @@
 #
 class redis::install ( $version = 'latest' ) {
 
+  $redis_package = $::osfamily? {
+    'Debian'  => 'redis-server',
+    default   => 'redis'
+  }
+
   package {
-    'redis':
+    $redis_package:
       ensure => $version,
   }
 }

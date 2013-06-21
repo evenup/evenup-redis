@@ -5,8 +5,7 @@
 #
 # === Parameters
 #
-# See the init.pp for parameter information.  This class should not be direclty called.
-#
+# See the init.pp for parameter information. Don't call this class directly.
 #
 # === Authors
 #
@@ -31,10 +30,22 @@ class redis::config (
   $auto_aof_rewrite_percentage,
   $auto_aof_rewrite_min_size,
   $slowlog_log_slower_than,
-  $slowlog_max_len
+  $slowlog_max_len,
+  $version
 ) {
 
-  file { '/etc/redis.conf':
+  $redis_file = $::osfamily? {
+    'Debian'  => '/etc/redis/redis.conf',
+    default   => '/etc/redis.conf'
+  }
+
+  # use vm. options only if 2.0-2.2 specified
+  $vm_options = $version? {
+    /^2\.[0-2]/ => true,
+    default     => false,
+  }
+
+  file { $redis_file:
     ensure  => file,
     owner   => 'redis',
     group   => 'redis',

@@ -1,6 +1,6 @@
 # == Class: redis
 #
-# This class installs and redis on RHEL based machines
+# This class installs and redis on RHEL- and Debian-based machines
 #
 #
 # === Examples
@@ -67,7 +67,8 @@
 #
 # [*maxmemory_policy*]
 #   How Redis decides what is removed from memory when maxmemory is reached
-#   volatile-lru, allkeys-lru, volatile-random, allkeys-random, voltaile-ttl, noevection are valid
+#   Valid values: volatile-lru, allkeys-lru, volatile-random,
+#          allkeys-random, voltaile-ttl, noevection
 #   Default: volatile-lru
 #
 # [*appendonly*]
@@ -128,9 +129,10 @@ class redis (
   $monitoring                   = '',
 ) {
 
-  # Needed for sensu monitoring.
-  # TODO - move to conditional block for monitoring to be enabled?
-  include ruby::redis
+
+  if  $monitoring == 'sensu' {
+    include ruby::redis
+  }
 
   class { 'redis::install': version => $version } ->
   class { 'redis::config':
@@ -153,6 +155,7 @@ class redis (
     auto_aof_rewrite_min_size   => $auto_aof_rewrite_min_size,
     slowlog_log_slower_than     => $slowlog_log_slower_than,
     slowlog_max_len             => $slowlog_max_len,
+    version                     => $version,
   } ~>
   class { 'redis::service':
     monitoring  => $monitoring,
