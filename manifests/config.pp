@@ -5,8 +5,7 @@
 #
 # === Parameters
 #
-# See the init.pp for parameter information.  This class should not be direclty called.
-#
+# See the init.pp for parameter information. Don't call this class directly.
 #
 # === Authors
 #
@@ -46,7 +45,7 @@ class redis::config (
     default     => false,
   }
 
-  file { $redis_file: 
+  file { $redis_file:
     ensure  => file,
     owner   => 'redis',
     group   => 'redis',

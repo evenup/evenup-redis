@@ -5,7 +5,7 @@
 #
 # === Parameters
 #
-# See the init.pp for parameter information.  This class should not be direclty called.
+# See the init.pp for parameter information.  Don't call this class directly.
 #
 #
 # === Authors

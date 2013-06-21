@@ -1,6 +1,6 @@
 # == Class: redis
 #
-# This class installs and redis on RHEL based machines
+# This class installs and redis on RHEL- and Debian-based machines
 #
 #
 # === Examples
@@ -67,7 +67,8 @@
 #
 # [*maxmemory_policy*]
 #   How Redis decides what is removed from memory when maxmemory is reached
-#   volatile-lru, allkeys-lru, volatile-random, allkeys-random, voltaile-ttl, noevection are valid
+#   Valid values: volatile-lru, allkeys-lru, volatile-random,
+#          allkeys-random, voltaile-ttl, noevection
 #   Default: volatile-lru
 #
 # [*appendonly*]
@@ -130,7 +131,7 @@ class redis (
 
 
   if  $monitoring == 'sensu' {
-    include ruby::redis 
+    include ruby::redis
   }
 
   class { 'redis::install': version => $version } ->
