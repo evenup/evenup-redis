@@ -25,6 +25,7 @@ class redis::service (
 
   case $monitoring {
     'sensu':  { include redis::monitoring::sensu }
+    default:  {}
   }
 
 }
