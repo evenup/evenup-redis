@@ -13,7 +13,6 @@
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
 #
 class redis::service (
-  $monitoring,
 ) {
 
   service {
@@ -21,11 +20,6 @@ class redis::service (
       ensure  => running,
       enable  => true,
       require => Package['redis'],
-  }
-
-  case $monitoring {
-    'sensu':  { include redis::monitoring::sensu }
-    default:  {}
   }
 
 }

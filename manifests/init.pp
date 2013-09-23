@@ -95,10 +95,6 @@
 #   Maximum log size for the slowlog
 #   Default: 1024
 #
-# [*monitoring*]
-#   String.  What monitoring service should be used to monitor this node
-#   Default: ''
-#
 # === Authors
 #
 # * Justin Lambert <mailto:jlambert@letsevenup.com>
@@ -125,12 +121,7 @@ class redis (
   $auto_aof_rewrite_min_size    = '64mb',
   $slowlog_log_slower_than      = 10000,
   $slowlog_max_len              = 1024,
-  $monitoring                   = '',
 ) {
-
-  # Needed for sensu monitoring.
-  # TODO - move to conditional block for monitoring to be enabled?
-  include ruby::redis
 
   class { 'redis::install': version => $version } ->
   class { 'redis::config':
@@ -154,9 +145,7 @@ class redis (
     slowlog_log_slower_than     => $slowlog_log_slower_than,
     slowlog_max_len             => $slowlog_max_len,
   } ~>
-  class { 'redis::service':
-    monitoring  => $monitoring,
-  } ->
+  class { 'redis::service': } ->
 
   Class['redis']
 
