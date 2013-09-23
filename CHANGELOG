@@ -1,3 +1,5 @@
+  Remove monitoring from module
+  Remove requirement of evenup/ruby
 v1.2.0:
   Remove hiera dependency
   Update sensu dependency
