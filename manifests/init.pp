@@ -127,7 +127,7 @@ class redis (
   class { 'redis::config':
     port                        => $port,
     listen                      => $listen,
-    unixsocket                  => '',
+    unixsocket                  => $unixsocket,
     redis_loglevel              => $redis_loglevel,
     databases                   => $databases,
     save                        => $save,
