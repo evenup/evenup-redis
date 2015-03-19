@@ -58,21 +58,3 @@ auto-aof-rewrite-min-size <%= scope.lookupvar('redis::config::auto_aof_rewrite_m
 # Slow log
 slowlog-log-slower-than <%= scope.lookupvar('redis::config::slowlog_log_slower_than') %>
 slowlog-max-len <%= scope.lookupvar('redis::config::slowlog_max_len') %>
-
-# Virtual Memory (deprecated in 2.4)
-vm-enabled no
-vm-swap-file /tmp/redis.swap
-vm-max-memory 0
-vm-page-size 32
-vm-pages 134217728
-vm-max-threads 4
-
-# Advanced Config
-hash-max-zipmap-entries 512
-hash-max-zipmap-value 64
-list-max-ziplist-entries 512
-list-max-ziplist-value 64
-set-max-intset-entries 512
-zset-max-ziplist-entries 128
-zset-max-ziplist-value 64
-activerehashing yes
