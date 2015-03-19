@@ -1,6 +1,6 @@
 {
   "name": "evenup-redis",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "Justin Lambert <jlambert@letsevenup.com>",
   "license": "Apache-2.0",
   "summary": "Manages redis",
