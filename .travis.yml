@@ -59,7 +59,9 @@ notifications:
   email: false
   hipchat:
     rooms:
-      - secure: 
+      - secure: PTLMgcN2s0N1A4B5vpL5QyHI0YiJJBYHOFCc2DCTlGy+X27I4PhM5aCG7OOJ
+Yefb63FmtQA+N3i6R/7G0tqJx3RemS4H5g9yauPsc6iI7zzxZa0azAtQecH+
+5nPTAKECRvof0dxltbde7AAAIlVdL3S/uXdAiItmPGaWGqxXrxk=
     template:
       - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
     format: html

@@ -101,52 +101,31 @@
 #
 # TODO - backups
 class redis (
-  $version                      = 'latest',
-  $port                         = '6379',
-  $listen                       = '127.0.0.1',
-  $unixsocket                   = '',
-  $redis_loglevel               = 'notice',
-  $databases                    = 16,
-  $save                         = [ '900 1', '300 10', '60 10000'],
-  $masterip                     = '',
-  $masterport                   = '6379',
-  $masterauth                   = '',
-  $requirepass                  = '',
-  $maxclients                   = 128,
-  $maxmemory                    = '',
-  $maxmemory_policy             = 'volatile-lru',
-  $appendonly                   = 'no',
-  $appendfsync                  = 'everysec',
-  $auto_aof_rewrite_percentage  = '100',
-  $auto_aof_rewrite_min_size    = '64mb',
-  $slowlog_log_slower_than      = 10000,
-  $slowlog_max_len              = 1024,
+  $version                     = 'latest',
+  $port                        = '6379',
+  $listen                      = '127.0.0.1',
+  $unixsocket                  = 'bob',
+  $redis_loglevel              = 'notice',
+  $databases                   = 16,
+  $save                        = [ '900 1', '300 10', '60 10000'],
+  $masterip                    = undef,
+  $masterport                  = '6379',
+  $masterauth                  = undef,
+  $requirepass                 = undef,
+  $maxclients                  = 128,
+  $maxmemory                   = undef,
+  $maxmemory_policy            = 'volatile-lru',
+  $appendonly                  = 'no',
+  $appendfsync                 = 'everysec',
+  $auto_aof_rewrite_percentage = '100',
+  $auto_aof_rewrite_min_size   = '64mb',
+  $slowlog_log_slower_than     = 10000,
+  $slowlog_max_len             = 1024,
 ) {
 
-  class { 'redis::install': version => $version } ->
-  class { 'redis::config':
-    port                        => $port,
-    listen                      => $listen,
-    unixsocket                  => $unixsocket,
-    redis_loglevel              => $redis_loglevel,
-    databases                   => $databases,
-    save                        => $save,
-    masterip                    => $masterip,
-    masterport                  => $masterport,
-    masterauth                  => $masterauth,
-    requirepass                 => $requirepass,
-    maxclients                  => $maxclients,
-    maxmemory                   => $maxmemory,
-    maxmemory_policy            => $maxmemory_policy,
-    appendonly                  => $appendonly,
-    appendfsync                 => $appendfsync,
-    auto_aof_rewrite_percentage => $auto_aof_rewrite_percentage,
-    auto_aof_rewrite_min_size   => $auto_aof_rewrite_min_size,
-    slowlog_log_slower_than     => $slowlog_log_slower_than,
-    slowlog_max_len             => $slowlog_max_len,
-  } ~>
-  class { 'redis::service': } ->
-
+  class { '::redis::install': version => $version } ->
+  class { '::redis::config': } ~>
+  class { '::redis::service': } ->
   Class['redis']
 
 }
