@@ -1,22 +1,17 @@
 require 'spec_helper'
 
-describe 'redis::config' do
+describe 'redis' do
 
   context 'default' do
 
     let(:params) { {
       :port => '6379',
       :listen => '127.0.0.1',
-      :unixsocket => '',
       :redis_loglevel => 'notice',
       :databases => 16,
       :save => [ '900 1', '300 10', '60 10000'],
-      :masterip => '',
       :masterport => '6379',
-      :masterauth => '',
-      :requirepass => '',
       :maxclients => 128,
-      :maxmemory => '',
       :maxmemory_policy => 'volatile-lru',
       :appendonly => 'no',
       :appendfsync => 'everysec',
@@ -92,8 +87,6 @@ describe 'redis::config' do
     it { should contain_file('/etc/redis.conf').with(:content => /^auto\-aof\-rewrite\-min\-size\s16mb$/) }
     it { should contain_file('/etc/redis.conf').with(:content => /^slowlog\-log\-slower\-than\s5000$/) }
     it { should contain_file('/etc/redis.conf').with(:content => /^slowlog\-max\-len\s2048$/) }
-
-
   end
 
 end
